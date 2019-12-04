@@ -2,27 +2,27 @@
 
 int main()
 {
-	const int a = 8;
-	int b = 0;
-	int c = 0;
+	const int a_var = 8;
+	int b_var = 0;
+	int c_var = 0;
 
 	std::cout << "Value b: ";
-	std::cin >> b;
+	std::cin >> b_var;
 
 	try
 	{
-		if (b == 0)
+		if (b_var == 0)
 		{
 			throw std::exception("Your input is not valid, you can't divide by zero.\n");
 		}
-		c = a / b;
+		c_var = a_var / b_var;
 	}
-	catch (std::exception & e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what();
 	}
 
-	std::cout << c << std::endl;
+	std::cout << c_var << std::endl;
 
 	return 0;
 }

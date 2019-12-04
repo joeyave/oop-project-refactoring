@@ -2,70 +2,80 @@
 #include <iostream>
 
 
-class NegativeException
+class NegativeException : std::exception
 {
 public:
-	explicit NegativeException(const std::string& msg) : msg_(msg) {}
-	std::string get_message() const { return msg_; }
+	explicit NegativeException(const std::string& msg)
+	{
+		error_message_ = msg;
+	}
+
+	const char* what() const noexcept override
+	{
+		return error_message_.c_str();
+	}
+
 private:
-	std::string msg_;
+	std::string error_message_;
 };
 
 
-float square_area(const float a)
+float square_area(const float latitude)
 {
-	float c = 0;
+	float area = 0;
 	try
 	{
-		if (a <= 0)
+		if (latitude <= 0)
 		{
 			throw NegativeException("Your input is not valid. The area can't be negative.");
 		}
 
-		c = a * a;
+		area = latitude * latitude;
 	}
-	catch (NegativeException & e)
+	catch (NegativeException& e)
 	{
-		std::cout << e.get_message() << "\n";
+		std::cout << e.what() << "\n";
 	}
 
-	return c;
+	return area;
 }
 
-float rectangle_area(const float a, const float b)
+float rectangle_area(const float latitude, const float longitude)
 {
-	float c = 0;
+	float area = 0;
 
 	try
 	{
-		if (a > 0 and b > 0)
+		if (latitude > 0 and longitude > 0)
 		{
-			c = a * b;
+			area = latitude * longitude;
 		}
 		else
 		{
 			throw NegativeException("Your input is not valid. The area can't be negative.");
 		}
 	}
-	catch (NegativeException & e)
+	catch (NegativeException& e)
 	{
-		std::cout << e.get_message() << "\n";
+		std::cout << e.what() << "\n";
 	}
 
-	return c;
+	return area;
 }
 
 
 int main()
 {
-	float a, b;
-	std::cin >> a;
-	std::cin >> b;
+	float latitude, longitude;
+	std::cout << "Input latitude: ";
+	std::cin >> latitude;
+	std::cout << "Input longitude: ";
+	std::cin >> longitude;
 
-	const float rsquare = square_area(a);
-	const float rrectangle = rectangle_area(a, b);
-	std::cout << rsquare << std::endl << rrectangle << std::endl;
+	const float square = square_area(latitude);
+	const float rectangle = rectangle_area(latitude, longitude);
+	std::cout << "Square area is " << square << std::endl;
+	std::cout << "Rectangle area is " << rectangle << std::endl;
 
 	return 0;
 }
-

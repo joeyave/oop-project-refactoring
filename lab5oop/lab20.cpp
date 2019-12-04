@@ -2,31 +2,29 @@
 
 int main()
 {
-	int a = 0, b = 0, c = 0;
+	int a_var = 0, b_var = 0, c_var = 0;
 
-	std::cin >> b;
-	std::cin >> a;
+	std::cout << "Input a: ";
+	std::cin >> a_var;
+
+	std::cout << "Input b: ";
+	std::cin >> b_var;
 
 	try
 	{
-		if (b == 0 and a == 0)
-		{
-			throw std::exception("There is no need for expression.\n");
-		}
-
-		if (b == 0)
+		if (b_var == 0)
 		{
 			throw std::exception("Your input is not valid, you can't divide by zero.\n");
 		}
 
-		c = a / b;
+		c_var = a_var / b_var;
 	}
-	catch (std::exception & e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what();
 	}
 
-	std::cout << c << std::endl;
+	std::cout << c_var << std::endl;
 
 	return 0;
 }

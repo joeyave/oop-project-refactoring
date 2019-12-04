@@ -4,52 +4,52 @@
 class ShopItemOrder
 {
 public:
-	ShopItemOrder(const std::string name, const double unit_price, const int number_ordered)
+	ShopItemOrder(const std::string name, const float unit_price, const int amount_ordered)
 	{
 		unit_name_ = name;
 		unit_price_ = unit_price;
-		number_ordered_ = number_ordered;
+		amount_ordered_ = amount_ordered;
 	}
 
-	std::string name_item() const
+	std::string get_unit_name() const
 	{
 		return unit_name_;
 	}
 
-	float price_item() const
+	float get_unit_price() const
 	{
 		return unit_price_;
 	}
 
-	int number_item() const
+	int get_number_ordered() const
 	{
-		return number_ordered_;
+		return amount_ordered_;
 	}
 
-	double get_total_price() const
+	float get_total_price() const
 	{
-		return unit_price_ * number_ordered_;
+		return static_cast<float>(amount_ordered_) * unit_price_;
 	}
 
 	void print() const
 	{
-		std::cout << "Ordered: " << unit_name_ << std::endl << "Number: " << number_ordered_ << std::endl
+		std::cout << "Ordered: " << unit_name_ << std::endl
+			<< "Amount: " << amount_ordered_ << std::endl
 			<< "Price: " << unit_price_ << std::endl;
+
+		std::cout << "Total price is " << get_total_price() << std::endl;
 	}
 
 private:
 	std::string unit_name_;
 	float unit_price_;
-	int number_ordered_;
+	int amount_ordered_;
 };
 
 int main()
 {
 	ShopItemOrder order("MacBook", 2000.0, 2);
-
 	order.print();
-	std::cout << "===========" << std::endl;
-	std::cout << "Total price: " << order.get_total_price() << std::endl;
 
 	return 0;
 }

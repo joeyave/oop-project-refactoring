@@ -4,67 +4,71 @@
 class Fraction
 {
 public:
-	Fraction(int numerator, int denominator);
-	double to_double() const;
-	std::string to_string() const;
+	Fraction(int numerator, int denominator)
+	{
+		numerator_ = numerator;
+		denominator_ = denominator;
+	}
+
+	void set_numerator(const int numerator)
+	{
+		numerator_ = numerator;
+	}
+
+	int get_numerator() const
+	{
+		return numerator_;
+	}
+
+	void set_denominator(const int denominator)
+	{
+		denominator_ = denominator;
+	}
+
+	int get_denominator() const
+	{
+		return denominator_;
+	}
+
+	float get_decimal() const
+	{
+		return static_cast<float>(numerator_) / static_cast<float>(denominator_);
+	}
+
 private:
 	int numerator_;
 	int denominator_;
 };
 
-Fraction::Fraction(const int numerator, const int denominator)
+struct NumDen
 {
-	numerator_ = numerator;
-	denominator_ = denominator;
-}
+	int num;
+	int den;
+};
 
-double Fraction::to_double() const
+NumDen fraction_split(std::string& input)
 {
-	return static_cast<double>(numerator_) / denominator_;
-}
+	const unsigned int found = input.find('/');
+	if (found != std::string::npos)
+	{
+		const std::string a = input.substr(0, found);
+		const std::string b = input.substr(found + 1, input.length());
+		const int num = stoi(a, nullptr, 10);
+		const int den = stoi(b, nullptr, 10);
 
-std::string Fraction::to_string() const
-{
-	std::string data;
-
-	int num = numerator_;
-	const int denum = denominator_;
-	const int whole = num / denum;
-	const int remain = whole * denum;
-
-	num -= remain;
-	std::string input = std::to_string(whole);
-	data += input;
-	data += " ";
-	input = std::to_string(num);
-	data += input;
-	data += "/";
-	input = std::to_string(denum);
-	data += input;
-
-	return data;
+		return {num, den};
+	}
+	return {0, 0};
 }
 
 int main()
 {
-	int num = 0;
-	int den = 0;
-
-	std::string input = "";
+	std::string input;
 	getline(std::cin, input);
+	const NumDen num_den = fraction_split(input);
 
-	if (input.find("/") != -1)
-	{
-		const int x = input.find("/");
-		const std::string a = input.substr(0, x);
-		const std::string b = input.substr(x + 1, input.length());
-		num = stoi(a, nullptr, 10);
-		den = stoi(b, nullptr, 10);
-	}
-
-	const Fraction fraction(num, den);
-	std::cout << fraction.to_string() << " is "
-		<< fraction.to_double() << " in decimal" << std::endl;
+	Fraction fraction(num_den.num, num_den.den);
+	std::cout << "Fraction in decimal is " << fraction.get_decimal() << std::endl;
 
 	return 0;
 }

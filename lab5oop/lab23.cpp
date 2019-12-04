@@ -4,24 +4,18 @@
 class Stack
 {
 public:
-	explicit Stack(const int size)
+	explicit Stack(const size_t size)
 	{
-		// что-то сделать
-		if (size < 0)
-		{
-			throw new std::exception("Negative_Value");
-		}
-
 		size_ = size;
 		arr_ = new int[size_];
 		top_ = arr_;
 	}
-
+	
 	~Stack()
 	{
 		delete arr_;
 	}
-
+	
 	bool is_empty() const
 	{
 		if (top_ > arr_)
@@ -73,35 +67,52 @@ public:
 private:
 	int* arr_;
 	int* top_;
-	int size_;
+	size_t size_;
+
+	friend std::istream& operator>>(std::istream& in, Stack& stack);
+	friend std::ostream& operator<<(std::ostream& out, Stack& stack);
+
 };
+
+std::istream& operator>>(std::istream& in, Stack& stack)
+{	
+	std::cout << "Input elements separated by space: " << std::endl;
+
+	int value;
+	for (size_t i = 0; i <= stack.size_; i++)
+	{
+		in >> value;
+		stack.push(value);
+	}
+	return in;
+}
+
+std::ostream& operator<<(std::ostream& out, Stack& stack)
+{
+	for (size_t i = 0; i <= stack.size_; i++)
+	{
+		int temp;
+		if (stack.pop(&temp))
+		{
+			std::cout << temp << std::endl;
+		}
+		else
+		{
+			std::cout << "Stack is empty." << std::endl;
+		}
+	}
+
+}
 
 int main()
 {
-	int n;
-	std::cout << "Count push: ";
-	std::cin >> n;
+	int size;
+	std::cout << "Input size: ";
+	std::cin >> size;
 
-	Stack s(n);
-
-	int number;
-	for (int i = 0; i <= n; i++)
-	{
-		std::cin >> number;
-		s.push(number);
-		std::cout << std::endl;
-	}
-
-	std::cout << "Count pop: ";
-	std::cin >> n;
-
-	for (int i = 0; i <= n; i++)
-	{
-		if (s.pop(&number))
-			std::cout << number << std::endl;
-		else
-			std::cout << "Exception: stack is empty." << std::endl;
-	}
-
+	Stack stk(size);
+	std::cin >> stk;
+	std::cout << stk;
+	
 	return 0;
 }

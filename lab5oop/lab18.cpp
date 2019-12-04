@@ -6,7 +6,10 @@ const int MAX_ITEMS = 10000;
 class IPAdress
 {
 public:
-	explicit IPAdress(const std::string& value) : value_(value) { }
+	explicit IPAdress(const std::string& value)
+	{
+		value_ = value;
+	}
 
 	IPAdress(const IPAdress& other)
 	{
@@ -19,6 +22,7 @@ public:
 	{
 		std::cout << value_ << std::endl;
 	}
+	
 protected:
 	std::string value_;
 };
@@ -29,11 +33,13 @@ public:
 	explicit IPAs(const int n)
 	{
 		items_ = new IPAdress[n];
+		iter_ = 0;
 	}
 
 	IPAs()
 	{
 		items_ = new IPAdress[MAX_ITEMS];
+		iter_ = 0;
 	}
 
 	void add_to_array(IPAdress ip_address);
@@ -48,7 +54,6 @@ public:
 	}
 private:
 	IPAdress* items_;
-	int n_;
 	int iter_;
 };
 
@@ -62,11 +67,10 @@ int main()
 {
 	std::string str;
 
-	std::cout << "Enter text: " << std::endl;
-
-	// Delete then.
 	IPAs* ipa1 = new IPAs();
 	IPAs* ipa2 = new IPAs();
+
+	std::cout << "Enter text: " << std::endl;
 
 	const int INPUT_NUM = 5;
 	for (int i = 0; i < INPUT_NUM; i++)
@@ -87,10 +91,14 @@ int main()
 		{
 			ipa2->add_to_array(*ip_address);
 		}
+
+		delete ip_address;
 	}
 
 	ipa1->show(1);
 	ipa2->show(2);
 
+	delete ipa1;
+	delete ipa2;
 	return 0;
 }

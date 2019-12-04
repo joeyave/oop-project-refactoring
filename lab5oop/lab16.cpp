@@ -21,7 +21,7 @@ private:
 bool ExactValidator::is_valid(const std::string input)
 {
 	std::cout << input << std::endl;
-	if (input.compare(password_) == 0)
+	if (input == password_)
 	{
 		return true;
 	}
@@ -56,7 +56,6 @@ int main()
 	std::cout << std::endl;
 
 	print_valid(exact, "secret");
-	std::cout << std::endl;
 	std::cout << std::endl;
 
 	return 0;

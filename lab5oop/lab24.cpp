@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
-#include <conio.h>
+#include <windows.h>
 
 struct Node
 {
 	int value;
-	Node* left, * right;
+	Node* left, *right;
 };
 
 void push(const int value, Node*& node)
@@ -52,25 +52,32 @@ std::ostream& inorder_recursive(std::ostream& out, Node* node)
 	return inorder_recursive(out, node->right);
 }
 
-std::ostream& operator <<(std::ostream& out, Node* node)
+std::ostream& operator<<(std::ostream& out, Node* node)
 {
 	return inorder_recursive(out, node);
 }
 
+std::istream& operator>>(std::istream& in, Node*& node)
+{
+		std::cout << "Input integer data to push. Input stop to stop :)";
+	while (true)
+	{
+		std::string ans;
+		std::cin >> ans;
+		if (ans == "stop")
+		{
+			break;
+		}
+		push(std::stoi(ans), node);
+	}
+	return in;
+}
 
 int main()
 {
 	Node* root = nullptr;
-	int value;
-	int size;
-	std::cin >> value;
-
-	for (int i = 0; i < value; ++i)
-	{
-		std::cin >> size;
-		push(size, root);
-	}
-
+	
+	std::cin >> root;
 	std::cout << root;
 	clear(root);
 

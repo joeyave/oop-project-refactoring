@@ -3,9 +3,14 @@
 const int MONTHS_NUM = 12;
 const int DAYS_NUM = 29;
 
+const int YEAR_ITERATOR_BEGIN = 2000;
+const int YEAR_ITERATOR_END = 2002;
+const int MONTH_ITERATOR_BEGIN = 1;
+const int MONTH_ITERATOR_END = 12;
+
 bool is_leap(const int year)
 {
-	if (year % 4 == 0 and year % 100 != 0 or year % 400 == 0)
+	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
 	{
 		return true;
 	}
@@ -25,9 +30,9 @@ int month_length(const int year, const int month)
 
 int main()
 {
-	for (int yr = 2000; yr < 2002; yr++)
+	for (int yr = YEAR_ITERATOR_BEGIN; yr < YEAR_ITERATOR_END; yr++)
 	{
-		for (int mo = 1; mo <= 12; mo++)
+		for (int mo = MONTH_ITERATOR_BEGIN; mo <= MONTH_ITERATOR_END; mo++)
 		{
 			std::cout << month_length(yr, mo) << " ";
 		}

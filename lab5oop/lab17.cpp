@@ -7,30 +7,43 @@ public:
 	virtual ~StringValidator() { }
 
 	virtual bool is_valid(std::string input) = 0;
+	virtual std::string get_validator_name() const = 0;
 };
 
 class PatternValidator final : public StringValidator
 {
 public:
-	explicit PatternValidator(const std::string val) : val_(val) { }
+	explicit PatternValidator(const std::string val)
+	{
+		val_ = val;
+		name_ = "PatternValidator";
+	}
 
 	bool is_valid(std::string input) override;
+	std::string get_validator_name() const override
+	{
+		return name_;
+	}
 private:
 	std::string val_;
+	std::string name_;
 };
 
 bool PatternValidator::is_valid(const std::string input)
 {
-	std::string tmpStr;
 	bool is_pattern = true;
-	for (int i = 0; i < input.size(); i++)
+	
+	for (size_t i = 0; i < input.size(); i++)
 	{
 		if (input.size() - i < val_.size())
 		{
 			break;
 		}
-		tmpStr = input.substr(i, val_.size());
-		for (int j = 0; j < tmpStr.size(); j++)
+		
+		std::string temp = input.substr(i, val_.size());
+
+		// Don't know how to refactor this.
+		for (size_t j = 0; j < temp.size(); j++)
 		{
 			if (val_[j] == '?')
 			{
@@ -39,7 +52,7 @@ bool PatternValidator::is_valid(const std::string input)
 
 			if (val_[j] == 'D')
 			{
-				if (isdigit(tmpStr[j]))
+				if (isdigit(temp[j]))
 				{
 					continue;
 				}
@@ -49,7 +62,7 @@ bool PatternValidator::is_valid(const std::string input)
 
 			if (val_[j] == 'A')
 			{
-				if (isalpha(tmpStr[j]))
+				if (isalpha(temp[j]))
 				{
 					continue;
 				}
@@ -59,7 +72,7 @@ bool PatternValidator::is_valid(const std::string input)
 
 			if (isalpha(val_[j]))
 			{
-				if (tolower(val_[j]) != tolower(tmpStr[j]))
+				if (tolower(val_[j]) != tolower(temp[j]))
 				{
 					is_pattern = false;
 					break;
@@ -67,7 +80,7 @@ bool PatternValidator::is_valid(const std::string input)
 				continue;
 			}
 
-			if (val_[j] != tmpStr[j])
+			if (val_[j] != temp[j])
 			{
 				is_pattern = false;
 				break;
@@ -86,13 +99,20 @@ bool PatternValidator::is_valid(const std::string input)
 class MaxLengthValidator final : public StringValidator
 {
 public:
-	explicit MaxLengthValidator(const int num) : num_(num)
+	explicit MaxLengthValidator(const size_t num)
 	{
+		num_ = num;
+		name_ = "MaxLengthValidator";
 	}
 
 	bool is_valid(std::string input) override;
+	std::string get_validator_name() const override
+	{
+		return name_;
+	}
 private:
-	int num_;
+	size_t num_;
+	std::string name_;
 };
 
 bool MaxLengthValidator::is_valid(const std::string input)
@@ -107,13 +127,20 @@ bool MaxLengthValidator::is_valid(const std::string input)
 class MinLengthValidator final : public StringValidator
 {
 public:
-	explicit MinLengthValidator(const int num) : num_(num)
+	explicit MinLengthValidator(const size_t num)
 	{
+		num_ = num;
+		name_ = "MinLengthValidator";
 	}
 
 	bool is_valid(std::string input) override;
+	std::string get_validator_name() const override
+	{
+		return name_;
+	}
 private:
-	int num_;
+	size_t num_;
+	std::string name_;
 };
 
 
@@ -132,23 +159,24 @@ void print_valid(StringValidator& validator, const std::string input)
 		<< (validator.is_valid(input) ? "valid" : "invalid") << std::endl;
 }
 
+void validate(StringValidator& validator, const std::string str1, const std::string str2)
+{
+	std::cout << validator.get_validator_name() << std::endl;
+	print_valid(validator, str1);
+	print_valid(validator, str2);
+	std::cout << std::endl;
+}
+
 int main()
 {
-	std::cout << "MinLengthValidator" << std::endl;
 	MinLengthValidator min(6);
-	print_valid(min, "hello");
-	print_valid(min, "welcome");
-	std::cout << std::endl;
-	std::cout << "MaxLengthValidator" << std::endl;
 	MaxLengthValidator max(6);
-	print_valid(max, "hello");
-	print_valid(max, "welcome");
-	std::cout << std::endl;
-	std::cout << "PatternValidator" << std::endl;
 	PatternValidator digit("D");
-	print_valid(digit, "there are 2 types of sentences in the world");
-	print_valid(digit, "valid and invalid ones");
-	std::cout << std::endl;
-	system("pause");
+
+	validate(min, "hello", "wellcome");
+	validate(max, "hello", "wellcome");
+	validate(digit, "there are 2 types of sentences in the world",
+		"valid and invalid ones");
+	
 	return 0;
 }
