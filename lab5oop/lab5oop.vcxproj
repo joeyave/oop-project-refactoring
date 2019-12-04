@@ -123,30 +123,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Lab 1.2.1.cpp" />
-    <ClCompile Include="Lab 1.3.1.cpp" />
-    <ClCompile Include="Lab 1.4.1.cpp" />
-    <ClCompile Include="Lab_2_1_5(1).cpp" />
-    <ClCompile Include="Lab_2_1_5(2).cpp" />
-    <ClCompile Include="Lab_2_1_5(3).cpp" />
-    <ClCompile Include="Lab_3_2_12(1).cpp" />
-    <ClCompile Include="Lab_3_2_12(2).cpp" />
-    <ClCompile Include="Lab_3_4_2.cpp" />
-    <ClCompile Include="Lab_4_2_5(1).cpp" />
-    <ClCompile Include="Lab_4_4_1(1).cpp" />
-    <ClCompile Include="Lab_4_5_6(1).cpp" />
-    <ClCompile Include="Lab_5_1_9(1).cpp" />
-    <ClCompile Include="Lab_5_1_9(4).cpp" />
-    <ClCompile Include="Lab_5_3_10(5).cpp" />
-    <ClCompile Include="Lab_6_4_4(1).cpp" />
-    <ClCompile Include="Lab_6_4_4(2).cpp" />
-    <ClCompile Include="Lab_6_5_8(1).cpp" />
-    <ClCompile Include="Lab_7_1_1(1).cpp" />
-    <ClCompile Include="Lab_7_1_3(1).cpp" />
-    <ClCompile Include="Lab_7_2_4(1).cpp" />
-    <ClCompile Include="Lab_8_1_1(1).cpp" />
-    <ClCompile Include="Lab_8_1_2(1).cpp" />
-    <ClCompile Include="Lab_8_3_4(1).cpp" />
+    <ClCompile Include="lab1.cpp" />
+    <ClCompile Include="lab10.cpp" />
+    <ClCompile Include="lab11.cpp" />
+    <ClCompile Include="lab12.cpp" />
+    <ClCompile Include="lab13.cpp" />
+    <ClCompile Include="lab14.cpp" />
+    <ClCompile Include="lab15.cpp" />
+    <ClCompile Include="lab16.cpp" />
+    <ClCompile Include="lab17.cpp" />
+    <ClCompile Include="lab18.cpp" />
+    <ClCompile Include="lab19.cpp" />
+    <ClCompile Include="lab2.cpp" />
+    <ClCompile Include="lab20.cpp" />
+    <ClCompile Include="lab21.cpp" />
+    <ClCompile Include="lab22.cpp" />
+    <ClCompile Include="lab23.cpp" />
+    <ClCompile Include="lab24.cpp" />
+    <ClCompile Include="lab3.cpp" />
+    <ClCompile Include="lab4.cpp" />
+    <ClCompile Include="lab5.cpp" />
+    <ClCompile Include="lab6.cpp" />
+    <ClCompile Include="lab7.cpp" />
+    <ClCompile Include="lab8.cpp" />
+    <ClCompile Include="lab9.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,7 +3,7 @@
 int main()
 {
 	const float VAL = 2.0f;
-	
+
 	float result = (VAL + 1) * 2;
 	std::cout << "Result: " << result << ". Expected result: 6" << std::endl;
 
