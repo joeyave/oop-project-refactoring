@@ -76,23 +76,21 @@ int main()
 	for (int i = 0; i < INPUT_NUM; i++)
 	{
 		getline(std::cin, str);
-		IPAdress* ip_address = new IPAdress(str);
+		IPAdress ip_address(str);
 
 		if (i < 2)
 		{
-			ipa1->add_to_array(*ip_address);
+			ipa1->add_to_array(ip_address);
 		}
 		else if (i == 2)
 		{
-			ipa1->add_to_array(*ip_address);
-			ipa2->add_to_array(*ip_address);
+			ipa1->add_to_array(ip_address);
+			ipa2->add_to_array(ip_address);
 		}
 		else
 		{
-			ipa2->add_to_array(*ip_address);
+			ipa2->add_to_array(ip_address);
 		}
-
-		delete ip_address;
 	}
 
 	ipa1->show(1);

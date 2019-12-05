@@ -2,21 +2,12 @@
 #include <iostream>
 
 
-class NegativeException : std::exception
+class NegativeException : public std::exception
 {
 public:
-	explicit NegativeException(const std::string& msg)
+	explicit NegativeException(const char* msg) : std::exception(msg)
 	{
-		error_message_ = msg;
 	}
-
-	const char* what() const noexcept override
-	{
-		return error_message_.c_str();
-	}
-
-private:
-	std::string error_message_;
 };
 
 

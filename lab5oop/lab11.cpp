@@ -23,7 +23,7 @@ bool check_pangram(std::string& input_string)
 
 	for (auto mark : marks)
 	{
-		if (mark == false)
+		if (!mark)
 		{
 			return false;
 		}
